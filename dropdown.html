@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dropdown</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="h-screen bg-gray-900">
+    <div class="m-10">
+        <button class="bg-blue-300 px-4 py-2 rounded" id="menu-btn">Menu</button>
+        
+        <div class="bg-gray-200 hidden flex-col rounded mt-1 p-2 text-sm w-32" id="dropdown">
+            <a href="#" class="px-2 py-1 hover:bg-blue-300 rounded">Posts</a>
+            <a href="#" class="px-2 py-1 hover:bg-blue-300 rounded">Profile</a>
+            <a href="#" class="px-2 py-1 hover:bg-blue-300 rounded">Settings</a>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', ()=> {
+            const menuBtn = document.querySelector('#menu-btn')
+            const dropdown = document.querySelector('#dropdown')
+            
+            menuBtn.addEventListener('click', () => {
+                /* if(dropdown.classList.contains('hidden')){
+                    dropdown.classList.remove('hidden');
+                    dropdown.classList.add('flex');
+                }else{
+                    dropdown.classList.remove('flex')
+                    dropdown.classList.add('hidden')
+                } */
+
+                dropdown.classList.toggle('hidden')
+                dropdown.classList.toggle('flex')
+            })
+
+        })
+    </script>
+</body>
+</html>
