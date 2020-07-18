@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tooltips</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        
+</head>
+<body class="h-screen bg-gray-800 p-16 antialiased">
+    
+    <div>
+        <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded" id="btn" aria-describedby="tooltip" data-tooltip-text="anything blah blah">
+            Hover
+        </button>
+
+        <div class="text-sm mt-2 bg-gray-600 text-gray-100 px-1 absolute rounded bg-opacity-50 shadow-xl hidden" id="tooltip" role="tooltip">
+            
+        </div>
+
+    </div>
+
+    <script>
+
+        window.addEventListener('DOMContentLoaded', () =>{
+            const btn = document.querySelector('#btn');
+            const tooltip = document.querySelector('#tooltip');
+
+            tooltip.innerHTML = btn.dataset.tooltipText
+
+            btn.addEventListener('mouseenter', () => {
+                tooltip.classList.remove('hidden');
+            })
+            
+            btn.addEventListener('mouseleave', () => {
+                tooltip.classList.add('hidden');
+            })
+
+        })
+    </script>
+</body>
+</html>
