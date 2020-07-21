@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>Pagination</title>
+</head>
+<body class="bg-gray-900 h-screen flex items-center justify-center">
+
+    <div class="text-gray-300 flex items-center space-x-2 select-none">
+        <button class="h-8 w-8 p-1 hover:bg-gray-700 rounded page-control" data-action="minus"><svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+        </svg></button>
+        <div class="space-x-1">
+            <button class="hover:bg-gray-700  px-2 rounded page-item" data-index="0">1</button>
+            <button class="hover:bg-gray-700 px-2 rounded page-item" data-index="1">2</button>
+            <button class="hover:bg-gray-700 px-2 rounded page-item" data-index="2">3</button>
+            <button class="hover:bg-gray-700 px-2 rounded page-item" data-index="3">4</button>
+        </div>
+        <button class="h-8 w-8 p-1 hover:bg-gray-700 rounded page-control" data-action="plus"><svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"></path>
+        </svg>
+        </button>
+    </div>
+   
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const pageItems = document.querySelectorAll('.page-item')
+            const pageControls = document.querySelectorAll('.page-control')
+            let activeIdx = 0;
+            makeActive(pageItems[activeIdx])
+            
+            pageItems.forEach(el => {
+                el.addEventListener('click', (event) => {
+                    makeInactive(pageItems[activeIdx])
+                    activeIdx = Number(event.target.dataset.index)
+                    makeActive(pageItems[activeIdx])
+                })
+            })
+
+            pageControls.forEach(el => {
+                el.addEventListener('click', (event) => {
+                    const diff = el.dataset.action==='plus'? +1: -1;
+                    const newIdx = activeIdx + diff;
+                    
+                    if((newIdx >= pageItems.length) || (newIdx < 0)) return;
+                    
+                    makeInactive(pageItems[activeIdx])
+                    makeActive(pageItems[newIdx]);
+                    activeIdx = newIdx
+                })
+            })
+        })
+
+        function makeActive(el){
+            el.classList.add('bg-gray-300', 'text-gray-800')
+            el.classList.remove('hover:bg-gray-700')
+        }
+
+        function makeInactive(el){
+            el.classList.remove('bg-gray-300', 'text-gray-800')
+            el.classList.add('hover:bg-gray-700')
+        }
+    </script>
+</body>
+</html>
